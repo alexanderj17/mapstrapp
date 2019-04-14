@@ -36,7 +36,6 @@ app.get('/callstrava', (req, res) => {
     .then(function(refreshToken){
         var runs=[];
         var url="https://www.strava.com/oauth/token?client_id="+clientId+"&client_secret="+clientSecret+"&grant_type=refresh_token&refresh_token="+refreshToken;
-        console.log("this is the url "+url);
         return fetch(url,{ 
             method: 'POST', body: 'a=1' 
         })
@@ -67,4 +66,4 @@ app.get('/callstrava', (req, res) => {
     });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(``))
