@@ -6,15 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Alexander James",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
-    "node-fetch": "^2.3.0",
-    
-    "startbootstrap-grayscale": "^5.0.6"
-  }
-
+    "node-fetch": "^2.3.0"
+      }
 }

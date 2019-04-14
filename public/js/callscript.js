@@ -111,7 +111,7 @@ function drawMapOfCurrent(actNumber){
     map = L.map('map').setView([-36.85, 174.76], 13);
   }else{
   }
-  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 50,}).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 50,}).addTo(map);
   var results=null;
   var polyline=null;  
   encodedRoutes.push(runArray[actNumber].map.summary_polyline);
