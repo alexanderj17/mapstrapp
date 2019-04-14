@@ -97,7 +97,7 @@ function drawMap(){
     map = L.map('map').setView([-36.85, 174.76], 13);
   }else{
   }
-  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 50,}).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 50,}).addTo(map);
 }
 
 //DRAW MAP WITH POLYLINES
