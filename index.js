@@ -29,10 +29,10 @@ app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, '/views', 'index.html'));
         theCode=req.query.code;
     }else{
+        res.sendFile(path.join(__dirname, '/views', 'index2.html'));
         res.redirect(redirectUrl);
-
     }
-
+    
 });
 function handleErrors(response) {
     if (!response.ok) {
