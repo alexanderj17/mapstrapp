@@ -4,17 +4,35 @@ require('dotenv').config();
 var clientSecret=process.env.CLIENT_SECRET;
 var clientId=process.env.CLIENT_ID;
 var port=process.env.PORT;
+var domainName=process.env.DOMAIN_NAME
 var path = require('path'); 
 app.use(express.static('public'));
 var router = express.Router();
 const fetch = require("node-fetch");
+var ogUrl=""
 var theCode="";
 var refreshToken="";
 
-app.get('/', (req, res) => {res.sendFile(path.join(__dirname, '/views', 'index.html'));
-    theCode=req.query.code;
-});
+function isObjectEmpty(Obj) {
+    for(var key in Obj) {
+    if(Obj.hasOwnProperty(key))
+    return false;
+    }
+    return true;
+}
 
+app.get('/', (req, res) => {
+    let currentQuery=req.query;
+    let redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
+    //CHECK IF SENT FROM OAUTH OR NOT
+    if(isObjectEmpty(currentQuery)){
+        res.redirect(redirectUrl);
+    }else{
+        res.sendFile(path.join(__dirname, '/views', 'index.html'));
+        theCode=req.query.code;
+    }
+
+});
 function handleErrors(response) {
     if (!response.ok) {
         throw Error(response.statusText);

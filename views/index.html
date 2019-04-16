@@ -6,6 +6,8 @@
         <link href="/style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
         <script type="text/javascript" src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css" />
@@ -21,5 +23,22 @@
       <script>loadcall();</script>
       <p id="results"></p>
       <p id="dataprintbtn"></p>
+
+
+      <script type="text/javascript">
+        console.log("hello");
+        function getQueryStringArray(){
+    var assoc=[]; 
+    var items = window.location.search.substring(1).split('&'); 
+    for(var j = 0; j < items.length; j++) { 
+       var a = items[j].split('='); assoc[a[0]] = a[1]; 
+       console.log("hi again")
+    }
+    getQueryStringArray()
+    console.log(assoc);
+    //return assoc;
+}
+            //window.location = "http://new-website.com";
+        </script>
     </body>
 </html>
