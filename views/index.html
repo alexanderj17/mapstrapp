@@ -6,8 +6,12 @@
         <link href="/style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-      
-
+      <script>
+      var query = window.location.search.substring(1);
+var qs = parse_query_string(query);
+        alert(qs);
+        </script>  
+    </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
         <script type="text/javascript" src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css" />
