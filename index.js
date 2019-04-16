@@ -25,12 +25,17 @@ app.get('/', (req, res) => {
     let currentQuery=req.query;
     let redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
     //CHECK IF SENT FROM OAUTH OR NOT
+    console.log("step 1");
     if(currentQuery.hasOwnProperty('code')){
         res.sendFile(path.join(__dirname, '/views', 'index.html'));
         theCode=req.query.code;
+        console.log("step 2");
+
     }else{
         res.sendFile(path.join(__dirname, '/views', 'index2.html'));
         res.redirect(redirectUrl);
+        console.log("step 3");
+
     }
     
 });
