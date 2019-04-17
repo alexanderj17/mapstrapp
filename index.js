@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, '/views', 'index.html'));
         let redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
         //CHECK IF SENT FROM OAUTH OR NOT
-        if(currentQuery.hasOwnProperty('code')){
+        if(currentQuery.hasOwnProperty('code')&&currentQuery.hasOwnProperty('scope')&&currentQuery.hasOwnProperty('state')){
             res.sendFile(path.join(__dirname, '/views', 'index.html'));
             theCode=req.query.code;
         }else{
