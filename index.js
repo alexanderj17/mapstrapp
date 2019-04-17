@@ -15,9 +15,7 @@ var refreshToken="";
 var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
 
 
-app.get('/getdomain', (req, res) => {
-    res.send(redirectUrl);
- });
+
 
 app.get('/', (req, res) => {
    let currentQuery=req.query;
@@ -30,7 +28,9 @@ function handleErrors(response) {
     }
     return response;
 }
-
+app.get('/getdomain', (req, res) => {
+    res.send(redirectUrl);
+ });
 app.get('/callstrava', (req, res) => { 
     let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
     fetch(callUrl,{ method: 'POST', body: 'a=1' })
