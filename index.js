@@ -10,7 +10,7 @@ app.use(express.static('public'));
 var router = express.Router();
 const fetch = require("node-fetch");
 var ogUrl=""
-var theCode="";
+var theCode=undefined;
 var refreshToken="";
 var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
 
