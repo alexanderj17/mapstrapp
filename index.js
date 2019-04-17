@@ -1,10 +1,10 @@
-const express = require('express');
-const app = express();
+var express = require('express');
+var app = express();
 require('dotenv').config();
-var clientSecret=process.env.CLIENT_SECRET;
-var clientId=process.env.CLIENT_ID;
-var port=process.env.PORT;
-var domainName=process.env.DOMAIN_NAME
+var clientSecret =process.env.CLIENT_SECRET;
+var clientId = process.env.CLIENT_ID;
+var port = process.env.PORT;
+var domainName = process.env.DOMAIN_NAME;
 var path = require('path'); 
 app.use(express.static('public'));
 var router = express.Router();
@@ -12,29 +12,17 @@ const fetch = require("node-fetch");
 var ogUrl=""
 var theCode="";
 var refreshToken="";
+var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
 
-function isObjectEmpty(Obj) {
-    for(var key in Obj) {
-    if(Obj.hasOwnProperty(key))
-    return false;
-    }
-    return true;
-}
+
+app.get('/getdomain', (req, res) => {
+    res.send(redirectUrl);
+ });
 
 app.get('/', (req, res) => {
-    let currentQuery=req.query;
-    let redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
-    //CHECK IF SENT FROM OAUTH OR NOT
-    if(currentQuery.hasOwnProperty('code')){
-        res.redirect(redirectUrl);
-
-        //res.sendFile(path.join(__dirname, '/views', 'index.html'));
+   let currentQuery=req.query;
+        res.sendFile(path.join(__dirname, '/views', 'index.html'));
         theCode=req.query.code;
-
-    }else{
-        res.redirect(redirectUrl);
-    }
-    
 });
 function handleErrors(response) {
     if (!response.ok) {
@@ -87,4 +75,4 @@ app.get('/callstrava', (req, res) => {
     });
 });
 
-app.listen(port, () => console.log(``))
+app.listen(port, () => console.log())

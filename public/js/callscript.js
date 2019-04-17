@@ -5,28 +5,43 @@ var savedRoutes=[];
 
 //ON PAGE LOAD
 function loadcall(){
-  //INITIALISE MAP
-  drawMap();
-
+  function isObjectEmpty(Obj) {
+    for(var key in Obj) {
+      if(Obj.hasOwnProperty(key))
+      return false;
+    }
+    return true;
+  }
   document.getElementById('change').innerHTML = "Accessing Strava API...";
-  
-  //CALL SERVER TO CALL API
-  var xhr = new XMLHttpRequest();
-  xhr.responseType = 'json';
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      runArray=xhr.response;
-      if(runArray.message!=undefined){
+  urlp=[];u=location.search.replace("?","").split("&").forEach(function(d){e=d.split("=");urlp[e[0]]=e[1];})
+  if(urlp["code"]==null){
+    var xhrDomain = new XMLHttpRequest();
+    xhrDomain.onreadystatechange = function() {
+      if (xhrDomain.readyState == XMLHttpRequest.DONE) {
+        let domain=xhrDomain.responseText;
+        window.location = domain;
+      }
+    }
+    xhrDomain.open('GET', '/getdomain', true);
+    xhrDomain.send(null);
+  }else{
+    //CALL SERVER TO CALL API
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        runArray=xhr.response;
+      if(runArray.message!=null){
         document.getElementById('change').innerHTML = runArray.message;
       }
-      //LOAD PAGE ELEMENTS
+        //LOAD PAGE ELEMENTS
       else{
         document.getElementById('change').innerHTML = "Strava data has been succesfully retrieved";
       }
       document.getElementById('dataprintbtn').innerHTML =
       "<button id='saverun' type='button' class='btn btn-success'>Save this run</button><button id='clearsavedruns' type='button' class='btn btn-success'>Clear saved runs</button>";
       //POPULATE DROP-DOWN MENU
-      allTheNames()
+      allTheNames();
       //EVENT LISTENERS
       document.getElementById('saverun').addEventListener("mousedown",function(event){
         let current = getCurrentID();
@@ -42,9 +57,13 @@ function loadcall(){
         drawMapOfCurrent(current);
       });
     }
+    
   }
   xhr.open('GET', '/callstrava', true);
   xhr.send(null);
+    //INITIALISE MAP
+    drawMap();
+  }
 }
 
 //CREATE ACTIVITY STRING
@@ -143,4 +162,7 @@ function drawMapOfCurrent(actNumber){
     map.fitBounds(theline.getBounds());
     }
   } 
-  }      
+}      
+
+
+
