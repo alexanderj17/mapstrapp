@@ -13,60 +13,63 @@ function isObjectEmpty(Obj) {
 //ON PAGE LOAD
 function loadcall(){
   document.getElementById('change').innerHTML = "Accessing Strava API...";
-  urlp=[];u=location.search.replace("?","").split("&").forEach(function(d){e=d.split("=");urlp[e[0]]=e[1];})
+  /*urlp=[];u=location.search.replace("?","").split("&").forEach(function(d){e=d.split("=");urlp[e[0]]=e[1];})
   if(urlp["code"]==null){
     var xhr1 = new XMLHttpRequest();
-    xhr.responseType = 'json';
     xhr1.onreadystatechange = function() {
       if (xhr1.readyState == XMLHttpRequest.DONE) {
-        curDomain=xhr1.response;
+        curDomain=xhr1.responseText;
         console.log(curDomain);
         //window.location = curDomain;
       }
     }
-    xhr1.open('GET', '/getdomain');
+    xhr1.open('GET', '/calldomain');
     xhr1.send(null);
-  }else{
+  }else{*/
     //CALL SERVER TO CALL API
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.onreadystatechange = function() {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         runArray=xhr.response;
-      if(runArray.message!=null){
-        document.getElementById('change').innerHTML = runArray.message;
-      }
-        //LOAD PAGE ELEMENTS
-      else{
-        document.getElementById('change').innerHTML = "Strava data has been succesfully retrieved";
-      }
-      document.getElementById('dataprintbtn').innerHTML =
-      "<button id='saverun' type='button' class='btn btn-success'>Save this run</button><button id='clearsavedruns' type='button' class='btn btn-success'>Clear saved runs</button>";
-      //POPULATE DROP-DOWN MENU
-      allTheNames();
-      //EVENT LISTENERS
-      document.getElementById('saverun').addEventListener("mousedown",function(event){
-        let current = getCurrentID();
-        if(runArray[current].map.summary_polyline==null){
-          alert("No map for this run");
-        }else{
-          savedRoutes.push(runArray[current].map.summary_polyline);
+        //console.log("responsetext"+J;
+        if(runArray.codeStatus!=null){
+          document.getElementById('change').innerHTML = runArray.message;
         }
-      });
-      document.getElementById('clearsavedruns').addEventListener("mousedown",function(event){
-        savedRoutes.length=0;
-        let current = getCurrentID();
-        drawMapOfCurrent(current);
-      });
+        else if(runArray.message!=null){
+          document.getElementById('change').innerHTML = runArray.message;
+        }
+          //LOAD PAGE ELEMENTS
+        else{
+          document.getElementById('change').innerHTML = "Strava data has been succesfully retrieved";
+        
+        document.getElementById('dataprintbtn').innerHTML =
+        "<button id='saverun' type='button' class='btn btn-success'>Save this run</button><button id='clearsavedruns' type='button' class='btn btn-success'>Clear saved runs</button>";
+        //POPULATE DROP-DOWN MENU
+        allTheNames();
+        //EVENT LISTENERS
+        document.getElementById('saverun').addEventListener("mousedown",function(event){
+          let current = getCurrentID();
+          if(runArray[current].map.summary_polyline==null){
+            alert("No map for this run");
+          }else{
+            savedRoutes.push(runArray[current].map.summary_polyline);
+          }
+        });
+        document.getElementById('clearsavedruns').addEventListener("mousedown",function(event){
+          savedRoutes.length=0;
+          let current = getCurrentID();
+          drawMapOfCurrent(current);
+        });
+      }
     }
-    
-  }
-  xhr.open('GET', '/callstrava', true);
-  xhr.send(null);
+    }
+    xhr.open('GET', '/callstrava', true);
+    xhr.send(null);
     //INITIALISE MAP
     drawMap();
   }
-}
+
 
 //CREATE ACTIVITY STRING
 function activityString(menuNum){

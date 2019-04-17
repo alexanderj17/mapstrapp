@@ -28,11 +28,16 @@ app.get('/', (req, res) => {
         theCode=req.query.code;
 });
 
-app.get('/getdomain', (req, res) => {
+/*app.get('/calldomain', (req, res) => {
     res.send(redirectUrl);
-});
+});*/
 app.get('/callstrava', (req, res) => { 
-    let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
+    console.log(theCode);
+    if(theCode==undefined){
+        let message={message:"Unable to reach Strava API"};
+        res.send(message);
+    }else{
+        let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
     fetch(callUrl,{ method: 'POST', body: 'a=1' })
     .then(handleErrors)
     .then(function(response) {
@@ -73,6 +78,7 @@ app.get('/callstrava', (req, res) => {
         let message={message:"Unable to reach Strava API"};
         res.send(message);
     });
+    }
 });
 
 app.listen(port, () => console.log())
