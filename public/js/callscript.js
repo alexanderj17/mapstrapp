@@ -2,6 +2,7 @@ var runArray=[];
 var encodedRoutes=[];
 var savedNames=[];
 var savedRoutes=[];
+var curDomain=[];
 function isObjectEmpty(Obj) {
   for(var key in Obj) {
     if(Obj.hasOwnProperty(key))
@@ -14,15 +15,17 @@ function loadcall(){
   document.getElementById('change').innerHTML = "Accessing Strava API...";
   urlp=[];u=location.search.replace("?","").split("&").forEach(function(d){e=d.split("=");urlp[e[0]]=e[1];})
   if(urlp["code"]==null){
-    var xhrDomain = new XMLHttpRequest();
-    xhrDomain.onreadystatechange = function() {
-      if (xhrDomain.readyState == XMLHttpRequest.DONE) {
-        let domain=xhrDomain.responseText;
-        window.location = domain;
+    var xhr1 = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr1.onreadystatechange = function() {
+      if (xhr1.readyState == XMLHttpRequest.DONE) {
+        curDomain=xhr1.response;
+        console.log(curDomain);
+        //window.location = curDomain;
       }
     }
-    xhrDomain.open('GET', '/getdomain');
-    xhrDomain.send(null);
+    xhr1.open('GET', '/getdomain');
+    xhr1.send(null);
   }else{
     //CALL SERVER TO CALL API
     var xhr = new XMLHttpRequest();
