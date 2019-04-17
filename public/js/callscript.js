@@ -20,7 +20,7 @@ function loadcall(){
       if (xhr.readyState == XMLHttpRequest.DONE) {
         runArray=xhr.response;
         if(runArray.reason=="Param"){
-          window.location=runArray.url;
+          window.location.replace=runArray.url;
         }
         else if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
