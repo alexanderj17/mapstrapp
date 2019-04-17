@@ -13,28 +13,14 @@ function isObjectEmpty(Obj) {
 //ON PAGE LOAD
 function loadcall(){
   document.getElementById('change').innerHTML = "Accessing Strava API...";
-  /*urlp=[];u=location.search.replace("?","").split("&").forEach(function(d){e=d.split("=");urlp[e[0]]=e[1];})
-  if(urlp["code"]==null){
-    var xhr1 = new XMLHttpRequest();
-    xhr1.onreadystatechange = function() {
-      if (xhr1.readyState == XMLHttpRequest.DONE) {
-        curDomain=xhr1.responseText;
-        console.log(curDomain);
-        //window.location = curDomain;
-      }
-    }
-    xhr1.open('GET', '/calldomain');
-    xhr1.send(null);
-  }else{*/
     //CALL SERVER TO CALL API
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.onreadystatechange = function() {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         runArray=xhr.response;
-        //console.log("responsetext"+J;
-        if(runArray.codeStatus!=null){
-          document.getElementById('change').innerHTML = runArray.message;
+        if(runArray.reason=="Param"){
+          window.location=runArray.url;
         }
         else if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;

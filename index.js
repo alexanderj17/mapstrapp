@@ -32,9 +32,8 @@ app.get('/', (req, res) => {
     res.send(redirectUrl);
 });*/
 app.get('/callstrava', (req, res) => { 
-    console.log(theCode);
     if(theCode==undefined){
-        let message={message:"Unable to reach Strava API"};
+        let message={reason:"Param",message:"Parameters not present",url:redirectUrl};
         res.send(message);
     }else{
         let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
