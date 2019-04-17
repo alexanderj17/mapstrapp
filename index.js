@@ -25,7 +25,14 @@ function handleErrors(response) {
 app.get('/', (req, res) => {
    let currentQuery=req.query;
         res.sendFile(path.join(__dirname, '/views', 'index.html'));
-        theCode=req.query.code;
+        let redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
+        //CHECK IF SENT FROM OAUTH OR NOT
+        if(currentQuery.hasOwnProperty('code')){
+            res.sendFile(path.join(__dirname, '/views', 'index.html'));
+            theCode=req.query.code;
+        }else{
+            res.redirect(redirectUrl);
+        }
 });
 
 /*app.get('/calldomain', (req, res) => {
@@ -34,6 +41,7 @@ app.get('/', (req, res) => {
 app.get('/callstrava', (req, res) => { 
     if(theCode==undefined){
         let message={reason:"Param",message:"Parameters not present",url:redirectUrl};
+        console.log("Test");
         res.send(message);
     }else{
         let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
