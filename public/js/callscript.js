@@ -2,16 +2,15 @@ var runArray=[];
 var encodedRoutes=[];
 var savedNames=[];
 var savedRoutes=[];
-
+function isObjectEmpty(Obj) {
+  for(var key in Obj) {
+    if(Obj.hasOwnProperty(key))
+    return false;
+  }
+  return true;
+}
 //ON PAGE LOAD
 function loadcall(){
-  function isObjectEmpty(Obj) {
-    for(var key in Obj) {
-      if(Obj.hasOwnProperty(key))
-      return false;
-    }
-    return true;
-  }
   document.getElementById('change').innerHTML = "Accessing Strava API...";
   urlp=[];u=location.search.replace("?","").split("&").forEach(function(d){e=d.split("=");urlp[e[0]]=e[1];})
   if(urlp["code"]==null){
@@ -22,7 +21,7 @@ function loadcall(){
         window.location = domain;
       }
     }
-    xhrDomain.open('GET', '/getdomain', true);
+    xhrDomain.open('GET', '/getdomain');
     xhrDomain.send(null);
   }else{
     //CALL SERVER TO CALL API
