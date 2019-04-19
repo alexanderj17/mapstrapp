@@ -23,23 +23,31 @@ function handleErrors(response) {
 }
 
 app.get('/', (req, res, next) => {
-   let currentQuery=req.query;
-        res.sendFile(path.join(__dirname, '/views', 'index.html'));
-        let redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
-        //CHECK IF SENT FROM OAUTH OR NOT
-        if(currentQuery.hasOwnProperty('code')&&currentQuery.hasOwnProperty('scope')&&currentQuery.hasOwnProperty('state')){
-            res.sendFile(path.join(__dirname, '/views', 'index.html'));
-            theCode=req.query.code;
-        }else{
-            res.redirect(redirectUrl);
-        }
+    console.log("In Root");
+    res.sendFile(path.join(__dirname, '/views', 'index.html'));
+             theCode=req.query.code;
+             console.log("the Code"+theCode);
 });
 
 /*app.get('/calldomain', (req, res) => {
     res.send(redirectUrl);
 });*/
 app.get('/callstrava', (req, res) => { 
-    
+
+    //res.sendFile(path.join(__dirname, '/views', 'index.html'));
+         var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
+         //CHECK IF SENT FROM OAUTH OR NOT
+         if(theCode===undefined){
+            console.log("In Redirect");
+            //let reDirMsg={reDirMsg:redirectUrl};
+            //res.send(reDirMsg);
+            console.log(redirectUrl);
+            let message={message:redirectUrl};
+            res.send(message);
+            //res.redirect(redirectUrl);
+         }else{
+             
+    console.log("In callStrava");
         let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
     fetch(callUrl,{ method: 'POST', body: 'a=1' })
     .then(handleErrors)
@@ -81,7 +89,7 @@ app.get('/callstrava', (req, res) => {
         let message={message:"Unable to reach Strava API"};
         res.send(message);
     });
-    
+}
 });
 
 app.listen(port, () => console.log())
