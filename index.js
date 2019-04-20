@@ -34,6 +34,7 @@ app.get('/callstrava', (req, res) => {
     }else{
         let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
         fetch(callUrl,{ method: 'POST', body: 'a=1'})
+        
     .then(handleErrors)
     .then(function(response) {
         //MAKES SURE THE CODE IS NOT STORED BEYOND WHEN IT IS USED
@@ -45,7 +46,7 @@ app.get('/callstrava', (req, res) => {
     })
     .then(function(refreshToken){
         var runs=[];
-        var url="https://www.strava.com/oauth/token?client_id="+clientId+"&client_secret="+clientSecret+"&grant_type=refresh_token&refresh_token="+refreshToken+'&seal='+random;
+        var url="https://www.strava.com/oauth/token?client_id="+clientId+"&client_secret="+clientSecret+"&grant_type=refresh_token&refresh_token="+refreshToken;
         return fetch(url,{ 
             method: 'POST', body: 'a=1' 
         })
