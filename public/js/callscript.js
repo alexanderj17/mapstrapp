@@ -26,7 +26,7 @@ function loadcall(){
         if(runArray.message!=null){
           //document.getElementById('change').innerHTML = runArray.message;
 
-          if(runArray.message.charAt[0]=="h"){
+          if(runArray.message.charAt(0)=="h"){
             document.getElementById('change').innerHTML = "HTTP";
           }else{
             document.getElementById('change').innerHTML = "not";
