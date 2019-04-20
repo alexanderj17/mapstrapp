@@ -24,7 +24,7 @@ function loadcall(){
           window.location=runArray.messageTwo;
         }*/
         if(runArray.message!=null){
-          document.getElementById('change').innerHTML = runArray.message;
+          document.getElementById('change').innerHTML = "Didn't work this time";
 
           /*if(runArray.message.charAt(0)=="h"){
             document.getElementById('change').innerHTML = "HTTP";
