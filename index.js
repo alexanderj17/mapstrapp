@@ -59,7 +59,7 @@ app.get('/callstrava', (req, res) => {
     })
     .then(function(refreshToken){
         var runs=[];
-        var url="https://www.strava.com/oauth/token?client_id="+clientId+"&client_secret="+clientSecret+"&grant_type=refresh_token&refresh_token="+refreshToken;
+        var url="https://www.strava.com/oauth/token?client_id="+clientId+"&client_secret="+clientSecret+"&grant_type=refresh_token&refresh_token="+refreshToken+'&seal='+random;
         return fetch(url,{ 
             method: 'POST', body: 'a=1' 
         })
@@ -70,7 +70,7 @@ app.get('/callstrava', (req, res) => {
         .then(function(myJson) {
             runs.push(myJson);
             let currentAccessToken = runs[0].access_token;
-            url='https://www.strava.com/api/v3/athlete/activities/?access_token='+currentAccessToken+'&page=1&per_page=200';
+            url='https://www.strava.com/api/v3/athlete/activities/?access_token='+currentAccessToken+'&page=1&per_page=200'+'&seal='+random;
             runs=[];
             return url;
         })
