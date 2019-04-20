@@ -39,18 +39,15 @@ app.get('/callstrava', (req, res) => {
     var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
          //CHECK IF SENT FROM OAUTH OR NOT
     if(theCode===undefined){
-            console.log("In Redirect");
-            //let reDirMsg={reDirMsg:redirectUrl};
-            //res.send(reDirMsg);
-            console.log(redirectUrl);
             let messageTwo={messageTwo:redirectUrl};
-            //res.redirect(message);
-
             res.send(messageTwo);
-         }else{
+    }else{
              
     console.log("In callStrava");
-    let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
+    var min=400; 
+    var max=5000;  
+    var random =Math.floor(Math.random() * (+max - +min)) + +min; 
+    let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all&seal='+random;
     fetch(callUrl,{ method: 'POST', body: 'a=1' })
     .then(handleErrors)
     .then(function(response) {
@@ -86,13 +83,13 @@ app.get('/callstrava', (req, res) => {
         })
         .then(function(myJson) {
             res.send(myJson);
-            myJson=null;
         })
     }).catch(function(error) {
         let message={message:"Unable to reach Strava API"};
         res.send(message);
     });
 }
+myJson=null;
 });
 
 app.listen(port, () => console.log())
