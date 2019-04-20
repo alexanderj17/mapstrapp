@@ -87,13 +87,15 @@ app.get('/callstrava', (req, res) => {
             res.send(myJson);
         })
     }).catch(function(error) {
-        if(theCode===undefined){
+        let message={message:"Didn't work"};
+        res.send(message);
+       /* if(theCode===undefined){
             let message={message:redirectUrl};
             res.send(message);
         }else{
             let message={message:redirectUrl};
             res.send(message);
-        }
+        }*/
     });
 }
 });
