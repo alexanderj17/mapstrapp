@@ -38,13 +38,13 @@ app.get('/callstrava', (req, res) => {
     //res.sendFile(path.join(__dirname, '/views', 'index.html'));
     var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
          //CHECK IF SENT FROM OAUTH OR NOT
-         if(theCode===undefined){
+    if(theCode===undefined){
             console.log("In Redirect");
             //let reDirMsg={reDirMsg:redirectUrl};
             //res.send(reDirMsg);
             console.log(redirectUrl);
             let message={message:redirectUrl};
-            res.redirect(redirectUrl);
+            res.redirect(message);
 
             //res.send(message);
          }else{
