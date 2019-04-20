@@ -33,11 +33,11 @@ app.get('/callstrava', (req, res) => {
         res.send(messageTwo);
     }else{
         let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
+        //MAKES SURE THE CODE IS NOT STORED BEYOND WHEN IT IS USED
+        theCode=undefined;
         fetch(callUrl,{ method: 'POST', body: 'a=1'})
-        
     .then(handleErrors)
     .then(function(response) {
-        //MAKES SURE THE CODE IS NOT STORED BEYOND WHEN IT IS USED
         return response.json();
     })
     .then(function(myJson) {
