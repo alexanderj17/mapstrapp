@@ -19,6 +19,10 @@ function loadcall(){
     xhr.onreadystatechange = function() {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         runArray=xhr.response;
+        if(runArray.messageTwo!=null){
+          document.getElementById('change').innerHTML = runArray.messageTwo;
+          window.location=runArray.messageTwo;
+        }
         if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
           window.location=runArray.message;
