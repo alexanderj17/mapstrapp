@@ -36,7 +36,7 @@ app.get('/', (req, res, next) => {
 app.get('/callstrava', (req, res) => { 
 
     //res.sendFile(path.join(__dirname, '/views', 'index.html'));
-         var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
+    var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
          //CHECK IF SENT FROM OAUTH OR NOT
          if(theCode===undefined){
             console.log("In Redirect");
@@ -49,7 +49,7 @@ app.get('/callstrava', (req, res) => {
          }else{
              
     console.log("In callStrava");
-        let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
+    let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
     fetch(callUrl,{ method: 'POST', body: 'a=1' })
     .then(handleErrors)
     .then(function(response) {
@@ -88,10 +88,10 @@ app.get('/callstrava', (req, res) => {
         })
     }).catch(function(error) {
         if(theCode===undefined){
-            let message={message:"Code undefined"};
+            let message={message:redirectUrl};
             res.send(message);
         }else{
-            let message={message:"Other error"};
+            let message={message:redirectUrl};
             res.send(message);
         }
     });
