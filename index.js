@@ -13,7 +13,9 @@ var ogUrl=""
 var theCode=undefined;
 var refreshToken="";
 var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
-var etagSetting=app.set('etag', false);
+app.set('etag', false);
+app.disable('view cache');
+
 
 
 function handleErrors(response) {
@@ -51,7 +53,10 @@ app.get('/callstrava', (req, res) => {
     var max=5000;  
     var random =Math.floor(Math.random() * (+max - +min)) + +min; 
     let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all&seal='+random;
-    fetch(callUrl,{ method: 'POST', body: 'a=1' })
+    theCode=undefined;
+    fetch(callUrl,{ method: 'POST', body: 'a=1',headers: {
+        'Cache-Control': 'no-cache'
+    }})
     .then(handleErrors)
     .then(function(response) {
         return response.json();
@@ -79,7 +84,11 @@ app.get('/callstrava', (req, res) => {
         })
     })
     .then (function(url){
-        fetch(url)
+        fetch(url,{
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+        })
         .then(handleErrors)
         .then(function(response){
         return response.json();
@@ -92,7 +101,6 @@ app.get('/callstrava', (req, res) => {
         res.send(message);
     });
 }
-myJson=null;
 });
 
 app.listen(port, () => console.log())

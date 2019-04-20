@@ -54,6 +54,10 @@ function loadcall(){
       }
     }
     }
+    var min=400; 
+    var max=5000;  
+    var random =Math.floor(Math.random() * (+max - +min)) + +min; 
+    var urlToCall='/callstrava/:'+random;
     xhr.open('GET', '/callstrava', true);
     xhr.send(null);
     //INITIALISE MAP
