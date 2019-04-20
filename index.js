@@ -13,6 +13,7 @@ var ogUrl=""
 var theCode=undefined;
 var refreshToken="";
 var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
+var etagSetting=app.set('etag', false);
 
 
 function handleErrors(response) {
@@ -34,7 +35,9 @@ app.get('/', (req, res, next) => {
     res.send(redirectUrl);
 });*/
 app.get('/callstrava', (req, res) => { 
-
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", 0);
     //res.sendFile(path.join(__dirname, '/views', 'index.html'));
     var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
          //CHECK IF SENT FROM OAUTH OR NOT
