@@ -25,8 +25,9 @@ function handleErrors(response) {
 app.get('/', (req, res, next) => {
     console.log("In Root");
     res.sendFile(path.join(__dirname, '/views', 'index.html'));
-             theCode=req.query.code;
-             console.log("the Code"+theCode);
+    theCode=req.query.code;
+    console.log("the Code"+theCode);
+    return theCode;
 });
 
 /*app.get('/calldomain', (req, res) => {

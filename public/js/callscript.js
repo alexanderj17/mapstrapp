@@ -25,7 +25,6 @@ function loadcall(){
         }
         if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
-          window.location=runArray.message;
         }
           //LOAD PAGE ELEMENTS
         else{
