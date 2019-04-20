@@ -24,18 +24,10 @@ function loadcall(){
           let theUrl=runArray.messageTwo;
           window.location.href=theUrl;
         }
-        if(runArray.message!=null){
+        else if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
           
-          
-
-          /*if(runArray.message.charAt(0)=="h"){
-            document.getElementById('change').innerHTML = "HTTP";
-          }else{
-            document.getElementById('change').innerHTML = "not";
-
-          }*/
-      
+        
         }
           //LOAD PAGE ELEMENTS
         else{
