@@ -44,9 +44,9 @@ app.get('/callstrava', (req, res) => {
             //res.send(reDirMsg);
             console.log(redirectUrl);
             let message={message:redirectUrl};
-            res.redirect(message);
+            //res.redirect(message);
 
-            //res.send(message);
+            res.send(message);
          }else{
              
     console.log("In callStrava");
