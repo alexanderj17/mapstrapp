@@ -13,40 +13,41 @@ function loadcall(){
     xhr.onreadystatechange = function() {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         runArray=xhr.response;
+        //IF MESSAGETWO HAS CONTENT, REDIRECT IS NECESSARY
         if(runArray.messageTwo!=null){
           document.getElementById('change').innerHTML = "Redirecting to Strava";
           let theUrl=runArray.messageTwo;
           window.location.href=theUrl;
         }
+        //IF MESSAGE HAS CONTENT, STRAVA IS UNREACHABLE
         else if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
         }
-          //LOAD PAGE ELEMENTS
+        //OTHERWISE A SUCCESSFUL CALL
+        //LOAD PAGE ELEMENTS
         else{
           document.getElementById('change').innerHTML = "Strava data has been succesfully retrieved";
-        document.getElementById('dataprintbtn').innerHTML =
-        "<button id='saverun' type='button' class='btn btn-success'>Save this run</button><button id='clearsavedruns' type='button' class='btn btn-success'>Clear saved runs</button>";
-        //POPULATE DROP-DOWN MENU
-        allTheNames();
-        //EVENT LISTENERS
-        document.getElementById('saverun').addEventListener("mousedown",function(event){
-          let current = getCurrentID();
-          if(runArray[current].map.summary_polyline==null){
-            alert("No map for this run");
-          }else{
-            savedRoutes.push(runArray[current].map.summary_polyline);
-          }
-        });
-        document.getElementById('clearsavedruns').addEventListener("mousedown",function(event){
-          savedRoutes.length=0;
-          let current = getCurrentID();
-          drawMapOfCurrent(current);
-        });
+          document.getElementById('dataprintbtn').innerHTML =
+          "<button id='saverun' type='button' class='btn btn-success'>Save this run</button><button id='clearsavedruns' type='button' class='btn btn-success'>Clear saved runs</button>";
+          //POPULATE DROP-DOWN MENU
+          allTheNames();
+          //EVENT LISTENERS
+          document.getElementById('saverun').addEventListener("mousedown",function(event){
+            let current = getCurrentID();
+            if(runArray[current].map.summary_polyline==null){
+              alert("No map for this run");
+            }else{
+              savedRoutes.push(runArray[current].map.summary_polyline);
+            }
+          });
+          document.getElementById('clearsavedruns').addEventListener("mousedown",function(event){
+            savedRoutes.length=0;
+            let current = getCurrentID();
+            drawMapOfCurrent(current);
+          });
+        }
       }
     }
-    }
-    
-    var urlToCall='/callstrava/';
     xhr.open('GET', '/callstrava', true);
     xhr.send(null);
     //INITIALISE MAP
@@ -150,6 +151,3 @@ function drawMapOfCurrent(actNumber){
     }
   } 
 }      
-
-
-
