@@ -43,10 +43,10 @@ app.get('/callstrava', (req, res) => {
             //let reDirMsg={reDirMsg:redirectUrl};
             //res.send(reDirMsg);
             console.log(redirectUrl);
-            let message={message:redirectUrl};
+            let messageTwo={messageTwo:redirectUrl};
             //res.redirect(message);
 
-            res.send(message);
+            res.send(messageTwo);
          }else{
              
     console.log("In callStrava");
@@ -88,15 +88,8 @@ app.get('/callstrava', (req, res) => {
             res.send(myJson);
         })
     }).catch(function(error) {
-        let message={message:"Didn't work"};
+        let message={message:"Unable to reach Strava API"};
         res.send(message);
-       /* if(theCode===undefined){
-            let message={message:redirectUrl};
-            res.send(message);
-        }else{
-            let message={message:redirectUrl};
-            res.send(message);
-        }*/
     });
 }
 });

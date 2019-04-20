@@ -19,13 +19,15 @@ function loadcall(){
     xhr.onreadystatechange = function() {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         runArray=xhr.response;
-        /*if(runArray.messageTwo!=null){
-          document.getElementById('change').innerHTML = runArray.messageTwo;
-        }*/
+        if(runArray.messageTwo!=null){
+          document.getElementById('change').innerHTML = "Redirecting to Strava";
+          let theUrl=runArray.messageTwo;
+          window.location.href=theUrl;
+        }
         if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
-          let theUrl=runArray.message;
-          window.location.href=theUrl;
+          
+          
 
           /*if(runArray.message.charAt(0)=="h"){
             document.getElementById('change').innerHTML = "HTTP";
