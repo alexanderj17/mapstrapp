@@ -87,8 +87,13 @@ app.get('/callstrava', (req, res) => {
             res.send(myJson);
         })
     }).catch(function(error) {
-        let message={message:"http"};
-        res.send(message);
+        if(theCode===undefined){
+            let message={message:"Code undefined"};
+            res.send(message);
+        }else{
+            let message={message:"Other error"};
+            res.send(message);
+        }
     });
 }
 });
