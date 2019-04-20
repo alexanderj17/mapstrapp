@@ -86,6 +86,7 @@ app.get('/callstrava', (req, res) => {
         })
         .then(function(myJson) {
             res.send(myJson);
+            myJson=null;
         })
     }).catch(function(error) {
         let message={message:"Unable to reach Strava API"};
