@@ -21,10 +21,10 @@ function loadcall(){
         runArray=xhr.response;
         /*if(runArray.messageTwo!=null){
           document.getElementById('change').innerHTML = runArray.messageTwo;
-          window.location=runArray.messageTwo;
         }*/
         if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
+          window.location=runArray.message;
 
           /*if(runArray.message.charAt(0)=="h"){
             document.getElementById('change').innerHTML = "HTTP";
