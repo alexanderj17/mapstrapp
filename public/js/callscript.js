@@ -17,7 +17,7 @@ function loadcall(){
         if(runArray.messageTwo!=null){
           document.getElementById('change').innerHTML = "Redirecting to Strava";
           let theUrl=runArray.messageTwo;
-          window.location.href=theUrl;
+          window.location.replace=theUrl;
         }
         //IF MESSAGE HAS CONTENT, STRAVA IS UNREACHABLE
         else if(runArray.message!=null){
