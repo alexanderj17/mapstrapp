@@ -3,13 +3,7 @@ var encodedRoutes=[];
 var savedNames=[];
 var savedRoutes=[];
 var curDomain=[];
-function isObjectEmpty(Obj) {
-  for(var key in Obj) {
-    if(Obj.hasOwnProperty(key))
-    return false;
-  }
-  return true;
-}
+
 //ON PAGE LOAD
 function loadcall(){
   document.getElementById('change').innerHTML = "Accessing Strava API...";
@@ -26,13 +20,10 @@ function loadcall(){
         }
         else if(runArray.message!=null){
           document.getElementById('change').innerHTML = runArray.message;
-          
-        
         }
           //LOAD PAGE ELEMENTS
         else{
           document.getElementById('change').innerHTML = "Strava data has been succesfully retrieved";
-        
         document.getElementById('dataprintbtn').innerHTML =
         "<button id='saverun' type='button' class='btn btn-success'>Save this run</button><button id='clearsavedruns' type='button' class='btn btn-success'>Clear saved runs</button>";
         //POPULATE DROP-DOWN MENU
@@ -54,16 +45,13 @@ function loadcall(){
       }
     }
     }
-    var min=400; 
-    var max=5000;  
-    var random =Math.floor(Math.random() * (+max - +min)) + +min; 
-    var urlToCall='/callstrava/:'+random;
+    
+    var urlToCall='/callstrava/';
     xhr.open('GET', '/callstrava', true);
     xhr.send(null);
     //INITIALISE MAP
     drawMap();
   }
-
 
 //CREATE ACTIVITY STRING
 function activityString(menuNum){

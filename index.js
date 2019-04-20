@@ -9,14 +9,9 @@ var path = require('path');
 app.use(express.static('public'));
 var router = express.Router();
 const fetch = require("node-fetch");
-var ogUrl=""
 var theCode=undefined;
 var refreshToken="";
 var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
-app.set('etag', false);
-app.disable('view cache');
-
-
 
 function handleErrors(response) {
     if (!response.ok) {
@@ -26,37 +21,25 @@ function handleErrors(response) {
 }
 
 app.get('/', (req, res, next) => {
-    console.log("In Root");
     res.sendFile(path.join(__dirname, '/views', 'index.html'));
     theCode=req.query.code;
-    console.log("the Code"+theCode);
     return theCode;
 });
 
-/*app.get('/calldomain', (req, res) => {
-    res.send(redirectUrl);
-});*/
 app.get('/callstrava', (req, res) => { 
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", 0);
-    //res.sendFile(path.join(__dirname, '/views', 'index.html'));
-    var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri=https://staging.alexanderjames.dev&approval_prompt=force&scope=read_all&scope=activity:read_all";
-         //CHECK IF SENT FROM OAUTH OR NOT
+    var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domain+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
+    //CHECK IF SENT FROM OAUTH OR NOT
     if(theCode===undefined){
-            let messageTwo={messageTwo:redirectUrl};
-            res.send(messageTwo);
+        let messageTwo={messageTwo:redirectUrl};
+        res.send(messageTwo);
     }else{
-             
-    console.log("In callStrava");
-    var min=400; 
-    var max=5000;  
-    var random =Math.floor(Math.random() * (+max - +min)) + +min; 
-    let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all&seal='+random;
-    theCode=undefined;
-    fetch(callUrl,{ method: 'POST', body: 'a=1',headers: {
-        'Cache-Control': 'no-cache'
-    }})
+        let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
+        //MAKES SURE THE CODE IS NOT STORED BEYOND WHEN IT IS USED
+        theCode=undefined;
+        fetch(callUrl,{ method: 'POST', body: 'a=1',})
     .then(handleErrors)
     .then(function(response) {
         return response.json();
@@ -78,17 +61,13 @@ app.get('/callstrava', (req, res) => {
         .then(function(myJson) {
             runs.push(myJson);
             let currentAccessToken = runs[0].access_token;
-            url='https://www.strava.com/api/v3/athlete/activities/?access_token='+currentAccessToken+'&page=1&per_page=200'+'&seal='+random;
+            url='https://www.strava.com/api/v3/athlete/activities/?access_token='+currentAccessToken+'&page=1&per_page=200';
             runs=[];
             return url;
         })
     })
     .then (function(url){
-        fetch(url,{
-        headers: {
-            'Cache-Control': 'no-cache'
-        }
-        })
+        fetch(url)
         .then(handleErrors)
         .then(function(response){
         return response.json();
