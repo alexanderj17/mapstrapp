@@ -11,7 +11,6 @@ var router = express.Router();
 const fetch = require("node-fetch");
 var theCode=undefined;
 var refreshToken="";
-//var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
 
 function handleErrors(response) {
     if (!response.ok) {
@@ -27,9 +26,6 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/callstrava', (req, res) => { 
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    res.setHeader("Pragma", "no-cache");
-    res.setHeader("Expires", 0);
     var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
     //CHECK IF SENT FROM OAUTH OR NOT
     if(theCode===undefined){
@@ -37,11 +33,10 @@ app.get('/callstrava', (req, res) => {
         res.send(messageTwo);
     }else{
         let callUrl='https://www.strava.com/oauth/token?client_id='+clientId+'&client_secret='+clientSecret+'&code='+theCode+'&grant_type=authorization_code&scope=read_all&scope=activity:read_all';
-        //MAKES SURE THE CODE IS NOT STORED BEYOND WHEN IT IS USED
-        theCode=undefined;
         fetch(callUrl,{ method: 'POST', body: 'a=1',})
     .then(handleErrors)
     .then(function(response) {
+        //MAKES SURE THE CODE IS NOT STORED BEYOND WHEN IT IS USED
         return response.json();
     })
     .then(function(myJson) {
