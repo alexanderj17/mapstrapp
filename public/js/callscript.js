@@ -19,12 +19,20 @@ function loadcall(){
     xhr.onreadystatechange = function() {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         runArray=xhr.response;
-        if(runArray.messageTwo!=null){
+        /*if(runArray.messageTwo!=null){
           document.getElementById('change').innerHTML = runArray.messageTwo;
           window.location=runArray.messageTwo;
-        }
+        }*/
         if(runArray.message!=null){
-          document.getElementById('change').innerHTML = runArray.message;
+          //document.getElementById('change').innerHTML = runArray.message;
+
+          if(runArray.message.charAt[0]=="h"){
+            document.getElementById('change').innerHTML = "HTTP";
+          }else{
+            document.getElementById('change').innerHTML = "not";
+
+          }
+      
         }
           //LOAD PAGE ELEMENTS
         else{

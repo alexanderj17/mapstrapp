@@ -43,8 +43,8 @@ app.get('/callstrava', (req, res) => {
             //let reDirMsg={reDirMsg:redirectUrl};
             //res.send(reDirMsg);
             console.log(redirectUrl);
-            let messageTwo={messageTwo:redirectUrl};
-            res.send(messageTwo);
+            //let messageTwo={messageTwo:redirectUrl};
+            //res.send(messageTwo);
             //res.redirect(redirectUrl);
          }else{
              
