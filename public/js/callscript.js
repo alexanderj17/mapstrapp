@@ -64,7 +64,7 @@ function activityString(menuNum){
   var latestType=runArray[menuNum].type;
   var latestName=runArray[menuNum].name;
   var latestDistance=runArray[menuNum].distance;
-  var nameString="Selected activity is a "+latestType+", named "+latestName+", over a distance of "+latestDistance+"m.";
+  var nameString="Selected activity is "+latestName+", a "+latestType+", over a distance of "+latestDistance+"m.";
   document.getElementById('results').innerHTML = nameString;
 }
 
