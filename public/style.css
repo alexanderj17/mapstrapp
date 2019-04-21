@@ -1,5 +1,25 @@
 /****** Main Styling ******/
+h2 {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	color: #222;
+	text-align: center;
+	line-height: 0.2em;
+}
+a {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	color: #808080;
+	text-align: center;
+	line-height: 0.2em;
+	text-decoration: none;
 
+
+}
+h1 {
+	padding: 0 !important;
+  margin: 0 !important;
+}
 body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
