@@ -5,6 +5,7 @@ var clientSecret =process.env.CLIENT_SECRET;
 var clientId = process.env.CLIENT_ID;
 var port = process.env.PORT;
 var domainName = process.env.DOMAIN_NAME;
+
 //sample data variables
 var polyline1=process.env.PL1;
 var polyline2=process.env.PL2;
@@ -33,8 +34,7 @@ app.get('/callstrava', (req, res) => {
     var redirectUrl="https://www.strava.com/oauth/authorize?client_id="+clientId+"&response_type=code&redirect_uri="+domainName+"&approval_prompt=force&scope=read_all&scope=activity:read_all";
     //SAMPLE DATA
     if(theCode==="sampledata"){
-        let sampleData=[
-            {
+        let sampleData=[{
                 "sample": "True",
                 "name": "Evening Run",
                 "distance": 7635.6,
@@ -43,12 +43,9 @@ app.get('/callstrava', (req, res) => {
                 "total_elevation_gain": 54.5,
                 "type": "Run",
                 "map": {
-                    
-                    "summary_polyline": polyline1,
-                   
+                    "summary_polyline": polyline1,   
                 },
-            },
-            {
+            },{
                 "name": "Negative splits",
                 "distance": 10012.9,
                 "moving_time": 2749,
@@ -56,12 +53,9 @@ app.get('/callstrava', (req, res) => {
                 "total_elevation_gain": 66.2,
                 "type": "Run",
                 "map": {
-                    
                     "summary_polyline": polyline2,
-                    
                 },
-            },
-            {
+            },{
                 "name": "A Northern Orewa excursion",
                 "distance": 17515.2,
                 "moving_time": 5945,
@@ -70,10 +64,8 @@ app.get('/callstrava', (req, res) => {
                 "type": "Run",
                 "map": {
                     "summary_polyline": polyline3,
-                    "resource_state": 2
                 },
-            },
-            {
+            }, {
                 "name": "A West Auckland Climb",
                 "distance": 7606.6,
                 "moving_time": 2651,
@@ -82,11 +74,8 @@ app.get('/callstrava', (req, res) => {
                 "type": "Run",
                 "map": {
                     "summary_polyline": polyline4,
-                    
                 },
-            }
-
-        ]
+            }]
         res.send(sampleData);
     }
     //CHECK IF SENT FROM OAUTH OR NOT
