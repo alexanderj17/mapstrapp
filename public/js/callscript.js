@@ -25,7 +25,6 @@ function loadcall(){
         //OTHERWISE A SUCCESSFUL CALL
         //LOAD PAGE ELEMENTS
         else{
-
           if(runArray[0].sample==="True"){
             document.getElementById('change').innerHTML = "Sample data has been succesfully retrieved";
           }
@@ -124,8 +123,7 @@ function drawMapOfCurrent(actNumber){
   }else{
   }
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 50,}).addTo(map);
-  var results=null;
-  var polyline=null;  
+  
   encodedRoutes.push(runArray[actNumber].map.summary_polyline);
   for (let saved of savedRoutes) {
     let coordinates = L.Polyline.fromEncoded(saved).getLatLngs();
