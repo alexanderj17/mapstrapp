@@ -35,43 +35,46 @@ app.get('/callstrava', (req, res) => {
     //SAMPLE DATA
     if(theCode==="sampledata"){
         let sampleData=[{
-                "sample": "True",
-                "name": "Evening Run",
-                "distance": 7635.6,
-                "moving_time": 1900,
-                "elapsed_time": 1900,
-                "total_elevation_gain": 54.5,
+                "name": "Exhibiton Drive and Arataki amongst the mist ",
+                "distance": 10622.8,
+                "moving_time": 3458,
+                "elapsed_time": 3917,
+                "total_elevation_gain": 110,
                 "type": "Run",
+                "workout_type": 0,
                 "map": {
-                    "summary_polyline": polyline1,   
+                    "summary_polyline": polyline1, 
                 },
             },{
-                "name": "Negative splits",
-                "distance": 10012.9,
-                "moving_time": 2749,
-                "elapsed_time": 2753,
-                "total_elevation_gain": 66.2,
-                "type": "Run",
-                "map": {
-                    "summary_polyline": polyline2,
-                },
-            },{
-                "name": "A Northern Orewa excursion",
-                "distance": 17515.2,
-                "moving_time": 5945,
-                "elapsed_time": 6164,
-                "total_elevation_gain": 320.5,
-                "type": "Run",
-                "map": {
-                    "summary_polyline": polyline3,
-                },
-            }, {
                 "name": "A West Auckland Climb",
                 "distance": 7606.6,
                 "moving_time": 2651,
                 "elapsed_time": 2655,
                 "total_elevation_gain": 206,
                 "type": "Run",
+                "workout_type": 0,
+                "map": {
+                    "summary_polyline": polyline2,
+                },
+            },{
+                "name": "Exhibition Dr and Mt Atkinson",
+                "distance": 9413.8,
+                "moving_time": 3088,
+                "elapsed_time": 3186,
+                "total_elevation_gain": 72.8,
+                "type": "Run",
+                "workout_type": 0,
+                "map": {
+                    "summary_polyline": polyline3,
+                },
+            }, {
+                "name": "Afternoon Run",
+                "distance": 4795.9,
+                "moving_time": 1404,
+                "elapsed_time": 1404,
+                "total_elevation_gain": 33.5,
+                "type": "Run",
+                "workout_type": 0,
                 "map": {
                     "summary_polyline": polyline4,
                 },
