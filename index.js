@@ -35,6 +35,7 @@ app.get('/callstrava', (req, res) => {
     //SAMPLE DATA
     if(theCode==="sampledata"){
         let sampleData=[{
+                "sample": "True",
                 "name": "Exhibiton Drive and Arataki amongst the mist ",
                 "distance": 10622.8,
                 "moving_time": 3458,
